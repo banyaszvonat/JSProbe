@@ -8,20 +8,20 @@ var LibraryFingerprinter = {};
 // Entry point, passes off to sub-functions (e.g. determining library by pathname)
 // Returns a text identifier that the mapper can resolve to a local copy
 LibraryFingerprinter.libraryFromRequest = function (libraryRequest) {
-	console.log( arguments.callee.name + "not implemented yet");
+	console.log("not implemented yet");
 }
 
 LibraryFingerprinter.libraryFromPath = function (libraryPath) {
-	console.log( arguments.callee.name + "not implemented yet");
+	console.log("not implemented yet");
 }
 
 LibraryFingerprinter.libraryFromFeature = function (libraryFeature) {
-	console.log( arguments.callee.name + "not implemented yet");
+	console.log("not implemented yet");
 }
 
 
 // Helper functions 
 
 LibraryFingerprinter.extractPath = function (libraryRequest) {
-	console.log( arguments.callee.name + "not implemented yet");
+	console.log("not implemented yet");
 }
