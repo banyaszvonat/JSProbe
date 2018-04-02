@@ -4,4 +4,6 @@
 
 var LibraryInjector = {};
 
-LibraryInjector.
+LibraryInjector.inject = function (internalLibraryIdentifier, request) {
+	
+}
