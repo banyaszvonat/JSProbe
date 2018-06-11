@@ -35,11 +35,15 @@ LibraryFingerprinter.libraryFromRegexMatch = function (regex, content) {
 // Helper functions 
 
 LibraryFingerprinter.extractPath = function (libraryRequest) {
-	console.log("not implemented yet");
+	let requestURL = new URL(libraryRequest.url);
+	
+	return requestURL.pathname;
 }
 
 LibraryFingerprinter.extractFilename = function (libraryRequest) {
-	console.log("not implemented yet");
+	let requestURL = new URL(libraryRequest.url);
+	
+	
 }
 
 LibraryFingerprinter.isJavaScript = function (libraryRequest) {

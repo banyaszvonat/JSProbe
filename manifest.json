@@ -1,0 +1,14 @@
+{
+	"description": "Replace remote JavaScript files with local versions",
+	"manifest_version":2,
+	"name":"JSProbe",
+	"version":0.1,
+	
+	"permissions":[
+	"webRequest",
+	"webRequestBlocking",
+	"<all_urls>"
+	],
+	
+	
+}
