@@ -6,19 +6,18 @@ var LibraryInjector = {};
 
 LibraryInjector.inject = function (requestDetails) {
 	
-	var internalLibraryIdentifier = LibraryFingerprinter.libraryFromRequest(requestDetails)
-	var injectedLibrary = userlibs[internalLibraryIdentifier];
-	
+	var injectedLibrary = LibraryFingerprinter.libraryFromRequest(requestDetails);
 	
 	if(injectedLibrary == userlibs.UNKNOWN)
 	{
 		// possible improvement only add listener for known url patterns
+		console.log("No match - injected library is %o", injectedLibrary);
 		return;
 	}
 	
-	console.log("URL match for injectable library: %o", injectedLibrary);
+	console.log("Match for injectable library: %o", injectedLibrary);
 	
-	var injectedLibraryURL = chrome.extension.GetURL(injectedLibrary.path);
+	var injectedLibraryURL = browser.extension.getURL(injectedLibrary.path);
 	
 	return {
 		redirectUrl: injectedLibraryURL
@@ -28,5 +27,5 @@ LibraryInjector.inject = function (requestDetails) {
 browser.webRequest.onBeforeRequest.addListener(
 	LibraryInjector.inject,
 	{urls: ["<all_urls>"], types:["script"]},
-	"blocking"
+	["blocking"]
 );

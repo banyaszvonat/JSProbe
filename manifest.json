@@ -2,7 +2,7 @@
 	"description": "Replace remote JavaScript files with local versions",
 	"manifest_version":2,
 	"name":"JSProbe",
-	"version":0.1,
+	"version":"0.1",
 	
 	"permissions":[
 	"webRequest",
@@ -10,5 +10,7 @@
 	"<all_urls>"
 	],
 	
-	
+	"background": {
+		"scripts": ["library-injector.js", "library-fingerprinter.js", "userlibs.js", "mappings.js"]
+	}
 }

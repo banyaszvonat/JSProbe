@@ -37,13 +37,15 @@ LibraryFingerprinter.libraryFromRegexMatch = function (regex, content) {
 LibraryFingerprinter.extractPath = function (libraryRequest) {
 	let requestURL = new URL(libraryRequest.url);
 	
+	console.log("Testing pathname: %o", requestURL.pathname);
 	return requestURL.pathname;
 }
 
 LibraryFingerprinter.extractFilename = function (libraryRequest) {
 	let requestURL = new URL(libraryRequest.url);
 	
-	
+	console.log("Testing URL: %o", requestURL.pathname.split('/').pop());
+	return requestURL.pathname.split('/').pop();
 }
 
 LibraryFingerprinter.isJavaScript = function (libraryRequest) {
