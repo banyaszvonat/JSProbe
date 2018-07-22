@@ -18,9 +18,11 @@ LibraryInjector.inject = function (requestDetails) {
 	console.log("Match for injectable library: %o", injectedLibrary);
 	
 	var injectedLibraryURL = browser.extension.getURL(injectedLibrary.path);
+	console.log("Path for injected library: %o", injectedLibraryURL);
+	injectedLibraryURL = injectedLibraryURL.toString();
 	
 	return {
-		redirectUrl: injectedLibraryURL
+		'redirectUrl': injectedLibraryURL
 	};
 }
 

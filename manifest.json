@@ -12,5 +12,9 @@
 	
 	"background": {
 		"scripts": ["library-injector.js", "library-fingerprinter.js", "userlibs.js", "mappings.js"]
-	}
+	},
+	
+	"web_accessible_resources": [
+		"userlibs/*"
+	]
 }
