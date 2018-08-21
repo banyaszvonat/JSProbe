@@ -5,9 +5,9 @@
 var mappings = {
   'path' : {},
   'filename' : {
-	  'jquery.js' : userlibs.jquery,
-	  'jquery.min.js' : userlibs.jquery,
-	  'jquery-1.11.3.js' : userlibs.jquery
+	  'jquery.js' : 'jquery',
+	  'jquery.min.js' : 'jquery',
+	  'jquery-1.11.3.js' : 'jquery'
 	  },
   'regex' : {}
 };

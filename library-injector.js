@@ -6,7 +6,14 @@ var LibraryInjector = {};
 
 LibraryInjector.inject = function (requestDetails) {
 	
-	var injectedLibrary = LibraryFingerprinter.libraryFromRequest(requestDetails);
+	var injectedLibraryIdentifier = LibraryFingerprinter.libraryFromRequest(requestDetails);
+	var injectedLibrary = userlibs[injectedLibraryIdentifier];
+	
+	if( !StateManager.tabs[requestDetails.tabId] ) {
+		StateManager.tabs[requestDetails.tabId] = {};
+	}
+
+	StateManager.tabs[requestDetails.tabId][injectedLibraryIdentifier] = {injected: false, path: injectedLibrary.name};
 	
 	if(injectedLibrary == userlibs.UNKNOWN)
 	{
@@ -20,6 +27,8 @@ LibraryInjector.inject = function (requestDetails) {
 	var injectedLibraryURL = browser.extension.getURL(injectedLibrary.path);
 	console.log("Path for injected library: %o", injectedLibraryURL);
 	injectedLibraryURL = injectedLibraryURL.toString();
+	
+	StateManager.tabs[requestDetails.tabId][injectedLibraryIdentifier]['injected'] = true;
 	
 	return {
 		'redirectUrl': injectedLibraryURL

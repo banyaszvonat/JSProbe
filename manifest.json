@@ -7,14 +7,24 @@
 	"permissions":[
 	"webRequest",
 	"webRequestBlocking",
-	"<all_urls>"
+	"<all_urls>",
+	"tabs"
 	],
 	
 	"background": {
-		"scripts": ["library-injector.js", "library-fingerprinter.js", "userlibs.js", "mappings.js"]
+		"scripts": ["statemanager.js", "library-injector.js", "library-fingerprinter.js", "userlibs.js", "mappings.js"]
 	},
 	
 	"web_accessible_resources": [
 		"userlibs/*"
-	]
+	],
+	
+	"browser_action": {
+		"default_popup": "popup/browseraction.html",
+		"browser_style": true,
+		"default_icon": {
+			"16": "icons/JSProbe-red-16.png",
+			"32": "icons/JSProbe-red-32.png"
+		}
+	}
 }
