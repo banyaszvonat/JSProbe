@@ -99,12 +99,14 @@ jQuery.fn = jQuery.prototype = {
 	length: 0,
 
 	toArray: function() {
+		console.log("toArray( %o )", arguments);
 		return slice.call( this );
 	},
 
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
+		console.log("get( %o )", arguments);
 		return num != null ?
 
 			// Return just the one element from the set
@@ -121,6 +123,8 @@ jQuery.fn = jQuery.prototype = {
 		// Build a new jQuery matched element set
 		var ret = jQuery.merge( this.constructor(), elems );
 
+		console.log("pushStack( %o )", arguments);
+		
 		// Add the old object onto the stack (as a reference)
 		ret.prevObject = this;
 		ret.context = this.context;
@@ -133,34 +137,42 @@ jQuery.fn = jQuery.prototype = {
 	// (You can seed the arguments with an array of args, but this is
 	// only used internally.)
 	each: function( callback, args ) {
+		console.log("each( %o )", arguments);
 		return jQuery.each( this, callback, args );
 	},
 
 	map: function( callback ) {
+		console.log("map( %o )", arguments);
 		return this.pushStack( jQuery.map(this, function( elem, i ) {
 			return callback.call( elem, i, elem );
 		}));
 	},
 
 	slice: function() {
+		console.log("slice( %o )", arguments);
 		return this.pushStack( slice.apply( this, arguments ) );
 	},
 
 	first: function() {
+		console.log("first( %o )", arguments);
 		return this.eq( 0 );
 	},
 
 	last: function() {
+		console.log("last( %o )", arguments);
 		return this.eq( -1 );
 	},
 
 	eq: function( i ) {
 		var len = this.length,
 			j = +i + ( i < 0 ? len : 0 );
+			
+		console.log("eq( %o )", arguments);
 		return this.pushStack( j >= 0 && j < len ? [ this[j] ] : [] );
 	},
 
 	end: function() {
+		console.log("end( %o )", arguments);
 		return this.prevObject || this.constructor(null);
 	},
 
@@ -178,6 +190,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 		length = arguments.length,
 		deep = false;
 
+	console.log("extend( %o )", arguments);
 	// Handle a deep copy situation
 	if ( typeof target === "boolean" ) {
 		deep = target;
@@ -244,28 +257,33 @@ jQuery.extend({
 	isReady: true,
 
 	error: function( msg ) {
+		console.log("error( %o )", arguments);
 		throw new Error( msg );
 	},
 
-	noop: function() {},
+	noop: function() {console.log("noop( %o )", arguments);},
 
 	// See test/unit/core.js for details concerning isFunction.
 	// Since version 1.3, DOM methods and functions like alert
 	// aren't supported. They return false on IE (#2968).
 	isFunction: function( obj ) {
+		console.log("isFunction( %o )", arguments);
 		return jQuery.type(obj) === "function";
 	},
 
 	isArray: Array.isArray || function( obj ) {
+		console.log("isArray( %o )", arguments);
 		return jQuery.type(obj) === "array";
 	},
 
 	isWindow: function( obj ) {
+		console.log("isWindow( %o )", arguments);
 		/* jshint eqeqeq: false */
 		return obj != null && obj == obj.window;
 	},
 
 	isNumeric: function( obj ) {
+		console.log("isNumeric( %o )", arguments);
 		// parseFloat NaNs numeric-cast false positives (null|true|false|"")
 		// ...but misinterprets leading-number strings, particularly hex literals ("0x...")
 		// subtraction forces infinities to NaN
@@ -275,6 +293,7 @@ jQuery.extend({
 
 	isEmptyObject: function( obj ) {
 		var name;
+		console.log("isEmptyObject( %o )", arguments);
 		for ( name in obj ) {
 			return false;
 		}
@@ -283,6 +302,8 @@ jQuery.extend({
 
 	isPlainObject: function( obj ) {
 		var key;
+		
+		console.log("isPlainObject( %o )", arguments);
 
 		// Must be an Object.
 		// Because of IE, we also have to check the presence of the constructor property.
@@ -319,6 +340,7 @@ jQuery.extend({
 	},
 
 	type: function( obj ) {
+		console.log("type( %o )", arguments);
 		if ( obj == null ) {
 			return obj + "";
 		}
@@ -331,6 +353,7 @@ jQuery.extend({
 	// Workarounds based on findings by Jim Driscoll
 	// http://weblogs.java.net/blog/driscoll/archive/2009/09/08/eval-javascript-global-context
 	globalEval: function( data ) {
+		console.log("globalEval( %o )", arguments);
 		if ( data && jQuery.trim( data ) ) {
 			// We use execScript on Internet Explorer
 			// We use an anonymous function so that context is window
@@ -344,10 +367,12 @@ jQuery.extend({
 	// Convert dashed to camelCase; used by the css and data modules
 	// Microsoft forgot to hump their vendor prefix (#9572)
 	camelCase: function( string ) {
+		console.log("camelCase( %o )", arguments);
 		return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 	},
 
 	nodeName: function( elem, name ) {
+		console.log("nodeName( %o )", arguments);
 		return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 	},
 
@@ -358,6 +383,7 @@ jQuery.extend({
 			length = obj.length,
 			isArray = isArraylike( obj );
 
+		console.log("each( %o )", arguments);
 		if ( args ) {
 			if ( isArray ) {
 				for ( ; i < length; i++ ) {
@@ -403,6 +429,7 @@ jQuery.extend({
 
 	// Support: Android<4.1, IE<9
 	trim: function( text ) {
+		console.log("trim( %o )", arguments);
 		return text == null ?
 			"" :
 			( text + "" ).replace( rtrim, "" );
@@ -412,6 +439,7 @@ jQuery.extend({
 	makeArray: function( arr, results ) {
 		var ret = results || [];
 
+		console.log("makeArray( %o )", arguments);
 		if ( arr != null ) {
 			if ( isArraylike( Object(arr) ) ) {
 				jQuery.merge( ret,
@@ -429,6 +457,7 @@ jQuery.extend({
 	inArray: function( elem, arr, i ) {
 		var len;
 
+		console.log("inArray( %o )", arguments);
 		if ( arr ) {
 			if ( indexOf ) {
 				return indexOf.call( arr, elem, i );
@@ -453,6 +482,7 @@ jQuery.extend({
 			j = 0,
 			i = first.length;
 
+		console.log("merge( %o )", arguments);
 		while ( j < len ) {
 			first[ i++ ] = second[ j++ ];
 		}
@@ -477,6 +507,7 @@ jQuery.extend({
 			length = elems.length,
 			callbackExpect = !invert;
 
+		console.log("grep( %o )", arguments);
 		// Go through the array, only saving the items
 		// that pass the validator function
 		for ( ; i < length; i++ ) {
@@ -497,6 +528,7 @@ jQuery.extend({
 			isArray = isArraylike( elems ),
 			ret = [];
 
+		console.log("map( %o )", arguments);
 		// Go through the array, translating each of the items to their new values
 		if ( isArray ) {
 			for ( ; i < length; i++ ) {
@@ -530,6 +562,7 @@ jQuery.extend({
 	proxy: function( fn, context ) {
 		var args, proxy, tmp;
 
+		console.log("proxy( %o )", arguments);
 		if ( typeof context === "string" ) {
 			tmp = fn[ context ];
 			context = fn;
@@ -555,6 +588,7 @@ jQuery.extend({
 	},
 
 	now: function() {
+		console.log("now( %o )", arguments);
 		return +( new Date() );
 	},
 
@@ -2775,20 +2809,8 @@ var rootjQuery,
 
 	init = jQuery.fn.init = function( selector, context ) {
 		var match, elem;
-
-		for (func in jQuery) {
-			if (typeof jQuery.fn[func] === 'function' && !funcHooked[func])	{
-				oldFunc = jQuery.fn[func];
-				
-				jQuery.fn[func] = function(){
-					var args = [].slice.call(arguments, 0);
-					console.log("%o (%o)", oldFunc, args);
-					oldFunc.apply(this, args);
-				};
-				
-				funcHooked[func] = true;
-			}
-		}
+		
+		console.log("init( %o )", arguments);
 
 		// HANDLE: $(""), $(null), $(undefined), $(false)
 		if ( !selector ) {
@@ -2913,6 +2935,7 @@ jQuery.extend({
 		var matched = [],
 			cur = elem[ dir ];
 
+		console.log("dir( %o )", arguments);
 		while ( cur && cur.nodeType !== 9 && (until === undefined || cur.nodeType !== 1 || !jQuery( cur ).is( until )) ) {
 			if ( cur.nodeType === 1 ) {
 				matched.push( cur );
@@ -2925,6 +2948,7 @@ jQuery.extend({
 	sibling: function( n, elem ) {
 		var r = [];
 
+		console.log("sibling( %o )", arguments);
 		for ( ; n; n = n.nextSibling ) {
 			if ( n.nodeType === 1 && n !== elem ) {
 				r.push( n );
@@ -2941,6 +2965,7 @@ jQuery.fn.extend({
 			targets = jQuery( target, this ),
 			len = targets.length;
 
+		console.log("has( %o )", arguments);
 		return this.filter(function() {
 			for ( i = 0; i < len; i++ ) {
 				if ( jQuery.contains( this, targets[i] ) ) {
@@ -2959,6 +2984,7 @@ jQuery.fn.extend({
 				jQuery( selectors, context || this.context ) :
 				0;
 
+		console.log("closest( %o )", arguments);
 		for ( ; i < l; i++ ) {
 			for ( cur = this[i]; cur && cur !== context; cur = cur.parentNode ) {
 				// Always skip document fragments
@@ -2981,6 +3007,7 @@ jQuery.fn.extend({
 	// Determine the position of an element within
 	// the matched set of elements
 	index: function( elem ) {
+		console.log("index( %o )", arguments);
 
 		// No argument, return index in parent
 		if ( !elem ) {
@@ -2999,6 +3026,7 @@ jQuery.fn.extend({
 	},
 
 	add: function( selector, context ) {
+		console.log("add( %o )", arguments);
 		return this.pushStack(
 			jQuery.unique(
 				jQuery.merge( this.get(), jQuery( selector, context ) )
@@ -3007,6 +3035,7 @@ jQuery.fn.extend({
 	},
 
 	addBack: function( selector ) {
+		console.log("addBack( %o )", arguments);
 		return this.add( selector == null ?
 			this.prevObject : this.prevObject.filter(selector)
 		);
@@ -3024,39 +3053,51 @@ function sibling( cur, dir ) {
 jQuery.each({
 	parent: function( elem ) {
 		var parent = elem.parentNode;
+		console.log("parent( %o )", arguments);
 		return parent && parent.nodeType !== 11 ? parent : null;
 	},
 	parents: function( elem ) {
+		console.log("parents( %o )", arguments);
 		return jQuery.dir( elem, "parentNode" );
 	},
 	parentsUntil: function( elem, i, until ) {
+		console.log("parentsUntil( %o )", arguments);
 		return jQuery.dir( elem, "parentNode", until );
 	},
 	next: function( elem ) {
+		console.log("next( %o )", arguments);
 		return sibling( elem, "nextSibling" );
 	},
 	prev: function( elem ) {
+		console.log("prev( %o )", arguments);
 		return sibling( elem, "previousSibling" );
 	},
 	nextAll: function( elem ) {
+		console.log("nextAll( %o )", arguments);
 		return jQuery.dir( elem, "nextSibling" );
 	},
 	prevAll: function( elem ) {
+		console.log("prevAll( %o )", arguments);
 		return jQuery.dir( elem, "previousSibling" );
 	},
 	nextUntil: function( elem, i, until ) {
+		console.log("nextUntil( %o )", arguments);
 		return jQuery.dir( elem, "nextSibling", until );
 	},
 	prevUntil: function( elem, i, until ) {
+		console.log("prevUntil( %o )", arguments);
 		return jQuery.dir( elem, "previousSibling", until );
 	},
 	siblings: function( elem ) {
+		console.log("siblings( %o )", arguments);
 		return jQuery.sibling( ( elem.parentNode || {} ).firstChild, elem );
 	},
 	children: function( elem ) {
+		console.log("children( %o )", arguments);
 		return jQuery.sibling( elem.firstChild );
 	},
 	contents: function( elem ) {
+		console.log("contents( %o )", arguments);
 		return jQuery.nodeName( elem, "iframe" ) ?
 			elem.contentDocument || elem.contentWindow.document :
 			jQuery.merge( [], elem.childNodes );
@@ -3098,6 +3139,7 @@ var optionsCache = {};
 // Convert String-formatted options into Object-formatted ones and store in cache
 function createOptions( options ) {
 	var object = optionsCache[ options ] = {};
+	console.log("createOptions( %o )", arguments);
 	jQuery.each( options.match( rnotwhite ) || [], function( _, flag ) {
 		object[ flag ] = true;
 	});
