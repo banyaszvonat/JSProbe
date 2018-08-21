@@ -36,6 +36,8 @@ LibraryInjector.inject = function (requestDetails) {
 	};
 }
 
+//TODO: maybe a listener here StateManager to send data to popup script
+
 browser.webRequest.onBeforeRequest.addListener(
 	LibraryInjector.inject,
 	{urls: ["<all_urls>"], types:["script"]},
