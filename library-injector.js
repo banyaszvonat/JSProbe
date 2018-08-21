@@ -6,14 +6,15 @@ var LibraryInjector = {};
 
 LibraryInjector.inject = function (requestDetails) {
 	
+	var originalFilename = LibraryFingerprinter.extractFilename(requestDetails);
 	var injectedLibraryIdentifier = LibraryFingerprinter.libraryFromRequest(requestDetails);
-	var injectedLibrary = userlibs[injectedLibraryIdentifier];
+	var injectedLibrary = userlibs[injectedLibraryIdentifier]; //accessing userlibs here is probably a step towards spaghetti code
 	
 	if( !StateManager.tabs[requestDetails.tabId] ) {
 		StateManager.tabs[requestDetails.tabId] = {};
 	}
 
-	StateManager.tabs[requestDetails.tabId][injectedLibraryIdentifier] = {injected: false, path: injectedLibrary.name};
+	StateManager.tabs[requestDetails.tabId][originalFilename] = {injected: false, path: injectedLibrary.name || userlibs.UNKNOWN, original_filename: originalFilename};
 	
 	if(injectedLibrary == userlibs.UNKNOWN)
 	{
@@ -28,7 +29,7 @@ LibraryInjector.inject = function (requestDetails) {
 	console.log("Path for injected library: %o", injectedLibraryURL);
 	injectedLibraryURL = injectedLibraryURL.toString();
 	
-	StateManager.tabs[requestDetails.tabId][injectedLibraryIdentifier]['injected'] = true;
+	StateManager.tabs[requestDetails.tabId][originalFilename]['injected'] = true;
 	
 	return {
 		'redirectUrl': injectedLibraryURL

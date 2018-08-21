@@ -9,7 +9,7 @@ var LibraryFingerprinter = {};
 
 
 // Entry point, passes off to sub-functions (e.g. determining library by pathname)
-// Returns a text identifier that the mapper can resolve to a local copy
+// Returns a text identifier that userlibs can resolve to a local copy
 LibraryFingerprinter.libraryFromRequest = function (libraryRequest) {
 	var filename = this.extractFilename(libraryRequest);
 	return this.libraryFromFilename(filename);
